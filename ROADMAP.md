@@ -1,8 +1,10 @@
 # Roadmap: MegaSaw XD
 
-- [ ] Measure the CPU limit: how many saw voices fit on the minilogue xd before it glitches (HyperSaw runs 3 layers x 7 voices)
-- [ ] Prototype on the PC with the test harness in `hypersaw-drumlogue` / HyperSaw
-- [ ] First build as `.mnlgxdunit`, with Shape = detune and Shift+Shape = mix
-- [ ] Compare against HyperSaw by ear and by level
-- [ ] Manual and starter sounds
-- [ ] Release the unit file in `dist/`
+- [x] Prototype on the PC with a test harness (`test/`)
+- [x] Voice count: 3 to 11 per layer, switchable (default 7 like HyperSaw); at 2x11 the cost matches HyperSaw's 3x7 on the PC
+- [x] First build as `.mnlgxdunit`, with Shape = detune and Shift+Shape = mix
+- [x] Compare against HyperSaw by level (within 0.2 dB)
+- [x] Manual and starter sounds (README)
+- [x] Release the unit file in `dist/`
+- [ ] Measure the real CPU limit on a minilogue xd (how many notes and voices before it glitches). Needs hardware, please report results
+- [ ] Compare against HyperSaw by ear on hardware

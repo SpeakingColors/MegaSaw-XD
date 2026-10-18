@@ -1,0 +1,21 @@
+{
+    "header" :
+    {
+        "platform" : "minilogue-xd",
+        "module" : "osc",
+        "api" : "1.1-0",
+        "dev_id" : 0,
+        "prg_id" : 0,
+        "version" : "1.0-0",
+        "name" : "MegaSaw",
+        "num_param" : 6,
+        "params" : [
+            ["Wave A",      0,   9, ""],
+            ["Wave B",      0,   9, ""],
+            ["Oct B",      -2,   2, "%"],
+            ["Layer Bal", -100, 100, "%"],
+            ["Voices",     -2,   2, "%"],
+            ["Drift",       0, 100, "%"]
+          ]
+    }
+}
