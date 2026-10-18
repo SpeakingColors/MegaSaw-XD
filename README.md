@@ -1,5 +1,7 @@
 # MegaSaw XD
 
+<img src="assets/icon.svg" width="96" align="right" alt="icon">
+
 Planned: a bigger supersaw oscillator for the KORG minilogue xd, built on what we learned making [HyperSaw](https://github.com/SpeakingColors/hypersaw-xd) and [SawWiden](https://github.com/SpeakingColors/sawwiden-xd).
 
 ## Status
