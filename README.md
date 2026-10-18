@@ -14,41 +14,51 @@ It is the merge of [HyperSaw](https://github.com/SpeakingColors/hypersaw-xd) (wa
 
 > Status: version 1.0, tested on a PC against HyperSaw (see "How it was tested"). Not yet tested on real minilogue xd hardware. If it glitches on your synth, turn **Voices** down and tell us.
 
-## Install
+## Install (Windows or Mac)
 1. Download the zip from Releases and unzip it. Do not unzip or rename the `.mnlgxdunit` file inside.
 2. Open **KORG minilogue xd Sound Librarian** and connect the xd by USB.
 3. Drag `MegaSaw.mnlgxdunit` into a free **User Oscillator** slot.
 4. Send it to the synth.
 5. On the xd: **Multi Engine, USR, MegaSaw**.
 
+## Install on Linux (not tested by us yet)
+The Sound Librarian has no Linux version, so use KORG's command line tool `logue-cli`:
+1. Get it from the [KORG logue SDK](https://github.com/korginc/logue-sdk) folder `tools/logue-cli`: run `get_logue_cli_linux.sh` (64-bit Linux only). On an immutable distro such as Bazzite, run it inside a distrobox.
+2. Check the file: `logue-cli check -u MegaSaw.mnlgxdunit`
+3. List the MIDI ports: `logue-cli probe -l`. Use the input port ending in **KBD/KNOB** and the output port ending in **SOUND** (the other ports are the old MIDI DIN jacks and will not work).
+4. Load it into a spare slot: `logue-cli load -u MegaSaw.mnlgxdunit -s 15 -i <in> -o <out>`
+5. If `load` fails, that is a known issue on Linux (KORG's issue #37). Tell us what you see.
+
 ## Controls
 | Control | What it does |
 |---|---|
 | SHAPE | Detune (JP-8000 curve). LFO and mod routing can sweep it |
 | SHIFT + SHAPE | Mix: center voice vs the side voices |
-| Wave A | Waveform of layer A (table below) |
-| Wave B | Waveform of layer B (0 = layer B off) |
+| Wave A | Waveform of layer A (table below). If it is Off, layer A plays Supersaw |
+| Wave B | Waveform of layer B (screen 1 = layer B off) |
 | Oct B | Octave of layer B vs layer A, -2 to +2 (the screen shows `%`, read it as octaves) |
 | Layer Bal | -100 = only A, 0 = equal, +100 = only B |
 | Voices | Voices per layer: -2 = 3, -1 = 5, **0 = 7**, +1 = 9, +2 = 11 (shows `%`, read it as the step) |
 | Drift | Each voice slowly wanders in pitch, like analog (0 to 100%) |
 
-| # | Wave | # | Wave |
-|---|---|---|---|
-| 0 | Off | 5 | Triangle |
-| 1 | Supersaw | 6 | Sine |
-| 2 | Square | 7 | Glass 1 (bright) |
-| 3 | Pulse 25% | 8 | Glass 2 (bell) |
-| 4 | Pulse 12% | 9 | Vox Ah (breathy vocal) |
+The xd screen shows Wave A and Wave B as **1 to 10** (it counts one higher than the wave's internal number):
 
-If both layers are 0, layer A plays Supersaw so you never get silence. Loudness stays the same whichever number of voices you pick.
+| Screen | Wave | Screen | Wave |
+|---|---|---|---|
+| 1 | Off | 6 | Triangle |
+| 2 | Supersaw | 7 | Sine |
+| 3 | Square | 8 | Glass 1 (bright) |
+| 4 | Pulse 25% | 9 | Glass 2 (bell) |
+| 5 | Pulse 12% | 10 | Vox Ah (breathy vocal) |
+
+If both layers are Off, layer A plays Supersaw so you never get silence. Loudness stays the same whichever number of voices you pick.
 
 ## Starter sounds
-- **Classic JP lead:** Wave A=1, Wave B=0, Voices 0, Shape ~60%, Shift+Shape ~70%
-- **Mega stack:** Wave A=1, Wave B=1, Oct B -1, Voices +2, Bal 0, Drift ~30%, Shape ~70%
-- **Hardstyle Ah lead:** Wave A=9, Wave B=1, Bal -20, Voices +1, Drift ~30%, Shape ~70%, Shift+Shape ~60%, short decay, sustain ~35%
-- **Pure choir:** Wave A=9, Wave B=0, Shape ~25%, slow attack
-- **Trance pad:** Wave A=1, Wave B=7, Oct B +1, Bal -30, Drift ~40%
+- **Classic JP lead:** Wave A Supersaw, Wave B Off, Voices 0, Shape ~60%, Shift+Shape ~70%
+- **Mega stack:** Wave A Supersaw, Wave B Supersaw, Oct B -1, Voices +2, Bal 0, Drift ~30%, Shape ~70%
+- **Hardstyle Ah lead:** Wave A Vox Ah, Wave B Supersaw, Bal -20, Voices +1, Drift ~30%, Shape ~70%, Shift+Shape ~60%, short decay, sustain ~35%
+- **Pure choir:** Wave A Vox Ah, Wave B Off, Shape ~25%, slow attack
+- **Trance pad:** Wave A Supersaw, Wave B Glass 1, Oct B +1, Bal -30, Drift ~40%
 
 Pairs well with [SawWiden](https://github.com/SpeakingColors/sawwiden-xd), our stereo widener mod FX (the xd oscillator output is mono, so width comes from the FX).
 
