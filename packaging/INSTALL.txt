@@ -1,0 +1,97 @@
+MegaSaw 1.0, minilogue xd user oscillator (Studio 87)
+
+A bigger SuperSaw oscillator: two layers of JP-8000 style supersaw, 3 to 11
+  voices per layer, each layer with its own waveform, plus analog-style
+  drift.
+
+WHAT YOU NEED
+  - A KORG minilogue xd with a USB cable to your computer
+  - Windows or Mac: the KORG minilogue xd Sound Librarian
+  - Linux: KORG's logue-cli (see the Linux section, not tested yet)
+
+INSTALL (Windows or Mac)
+  1. Open the zip and keep the MegaSaw.mnlgxdunit file as it is. It is
+     itself a zip: do not rename it or open it.
+  2. Open the Sound Librarian and connect the synth by USB.
+  3. Drag MegaSaw.mnlgxdunit into a free User Oscillator slot.
+  4. Send to the synth and wait until it finishes.
+  5. On the synth: Multi Engine, USR, MegaSaw.
+
+INSTALL (Linux, not tested yet)
+  The Sound Librarian has no Linux version. KORG's command line tool
+  logue-cli can load units (64-bit Linux only; get it from the logue-sdk
+  repo, folder tools/logue-cli, script get_logue_cli_linux.sh).
+  1. logue-cli check -u MegaSaw.mnlgxdunit
+  2. logue-cli probe -l
+     Use the input port ending in KBD/KNOB and the output port ending in
+     SOUND. The other ports are the old MIDI DIN jacks.
+  3. logue-cli load -u MegaSaw.mnlgxdunit -i <in port> -o <out port>
+     (this uses the first free slot)
+  If load fails on Linux, that is a known issue in KORG's repo (#37).
+
+CONTROLS (as the synth screen shows them)
+  The xd shows typeless parameters (Wave A and Wave B) one higher than the
+    number the code uses, so they read 1 to 10. Oct B, Layer Bal, Voices and
+    Drift show a percent sign.
+
+  - SHAPE [knob]: Detune, JP-8000 curve. The xd's LFO and mod routing can
+      sweep it.
+  - SHIFT + SHAPE [knob]: Mix: centre voice against the side voices.
+  - Wave A [1 to 10]: Waveform of layer A (list below). If both layers are
+      Off, layer A plays Supersaw.
+  - Wave B [1 to 10]: Waveform of layer B (1 = layer B off).
+  - Oct B [-2% to 2%]: Octave of layer B against layer A. The screen shows
+      %, read it as octaves.
+  - Layer Bal [-100% to 100%]: -100% = only layer A, 0% = equal, +100% =
+      only layer B.
+  - Voices [-2% to 2%]: Voices per layer: -2 = 3, -1 = 5, 0 = 7, +1 = 9, +2
+      = 11. The screen shows %, read it as the step. Loudness stays the
+      same.
+  - Drift [0% to 100%]: Each voice slowly wanders in pitch, like analog (0
+      to 100%).
+
+Wave A and Wave B values (screen shows 1 to 10):
+   1  Off
+   2  Supersaw
+   3  Square
+   4  Pulse 25%
+   5  Pulse 12%
+   6  Triangle
+   7  Sine
+   8  Glass 1 (bright)
+   9  Glass 2 (bell)
+  10  Vox Ah (breathy vocal)
+
+  If both layers are Off (screen 1), layer A plays Supersaw so you never get
+    silence.
+
+STARTER SOUNDS
+  - Classic JP lead: Wave A 2 (Supersaw), Wave B 1, Voices 0, Shape about
+      60%, Shift+Shape about 70%.
+  - Mega stack: Wave A 2, Wave B 2, Oct B -1, Voices +2, Layer Bal 0, Drift
+      about 30%, Shape about 70%.
+  - Hardstyle Ah lead: Wave A 10 (Vox Ah), Wave B 2, Layer Bal -20, Voices
+      +1, Drift about 30%, Shape about 70%, Shift+Shape about 60%, short
+      decay, sustain about 35%.
+  - Pure choir: Wave A 10, Wave B 1, Shape about 25%, slow attack.
+  - Trance pad: Wave A 2, Wave B 8 (Glass 1), Oct B +1, Layer Bal -30, Drift
+      about 40%.
+
+PROBLEMS
+  The xd plays up to 4 notes and each note runs its own copy of the
+    oscillator, so 2 layers of 11 voices can be too much for a busy chord.
+    Lower Voices first, then turn layer B off (Wave B 1). Vox Ah and Glass
+    waves cost more than saws.
+
+STATUS
+  - Version 1.0. The unit in dist/ was built from this repo's source.
+  - Tested on a PC only (test/ folder): every wave, voice count and extreme
+      setting renders without NaN, clipping or DC offset, and loudness
+      varies by less than 1 dB between 3 and 11 voices. Not yet tested on a
+      real minilogue xd.
+  - Linux install steps are not tested yet.
+
+Source and updates: https://github.com/SpeakingColors/MegaSaw-XD
+Free and open source (MIT). Collects nothing, no network.
+Not affiliated with or endorsed by KORG. KORG and minilogue are trademarks of
+KORG Inc., used only to say which synth this works with.
